@@ -23,7 +23,6 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected $mandango;
     protected $unitOfWork;
     protected $metadataFactory;
-    protected $cache;
     protected $mongo;
     protected $db;
 
@@ -40,7 +39,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
 
         if (!static::$staticMandango) {
-            static::$staticMandango = new Mandango(new $this->metadataFactoryClass, new ArrayCache());
+            static::$staticMandango = new Mandango(new $this->metadataFactoryClass());
             static::$staticMandango->setConnection('default', $this->connection);
             static::$staticMandango->setDefaultConnectionName('default');
         }
@@ -53,7 +52,6 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $this->mandango = static::$staticMandango;
         $this->unitOfWork = $this->mandango->getUnitOfWork();
         $this->metadataFactory = $this->mandango->getMetadataFactory();
-        $this->cache = $this->mandango->getCache();
 
         foreach ($this->mandango->getAllRepositories() as $repository) {
             $repository->getIdentityMap()->clear();
