@@ -23,7 +23,6 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected $mandango;
     protected $unitOfWork;
     protected $metadataFactory;
-    protected $cache;
     protected $mongo;
     protected $db;
 
@@ -53,7 +52,6 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $this->mandango = static::$staticMandango;
         $this->unitOfWork = $this->mandango->getUnitOfWork();
         $this->metadataFactory = $this->mandango->getMetadataFactory();
-        $this->cache = $this->mandango->getFieldsCache();
 
         foreach ($this->mandango->getAllRepositories() as $repository) {
             $repository->getIdentityMap()->clear();
